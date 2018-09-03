@@ -121,7 +121,6 @@ void swap(int array[], int i, int j)
 #pragma mark -
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
 //    bubbleSort();
@@ -134,7 +133,6 @@ void swap(int array[], int i, int j)
 }
 
 - (void)testQuickSort {
-    
     int array[] = {5, 95, 15, 85, 25, 75, 35, 65, 45, 55};
     int arrayLength = sizeof(array) / sizeof(int);
     quickSort(array, 0, arrayLength - 1);
