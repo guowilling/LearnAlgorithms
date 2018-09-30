@@ -83,7 +83,6 @@ void swap(int array[], int i, int j)
 #pragma mark - 
 
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
     
     {
@@ -105,6 +104,41 @@ void swap(int array[], int i, int j)
         }
         printf("binarySearch: %d", binarySearch(array, arrayLength, 55));
     }
+}
+
+#pragma mark - 查找两个子视图的共同父视图
+
+- (NSArray<UIView *> *)findCommonSuperView:(UIView *)viewOne other:(UIView *)viewOther {
+    NSMutableArray *result = [NSMutableArray array];
+    
+    // 第一个视图的所有父视图
+    NSArray *superViewsOne = [self superViewsOfView:viewOne];
+    // 第二个视图的所有父视图
+    NSArray *superViewsOther = [self superViewsOfView:viewOther];
+    
+    int i = 0;
+    while (i < MIN(superViewsOne.count, superViewsOther.count)) { // 越界限制条件
+        // 倒序获取各个视图的父视图
+        UIView *superOne = [superViewsOne objectAtIndex:superViewsOne.count - i - 1];
+        UIView *superOther = [superViewsOther objectAtIndex:superViewsOther.count - i - 1];
+        if (superOne == superOther) { // 如果相等则为共同父视图
+            [result addObject:superOne];
+            i++;
+        } else {
+            break; // 如果不相等则结束遍历
+        }
+    }
+    return result;
+}
+
+- (NSArray <UIView *> *)superViewsOfView:(UIView *)view {
+    UIView *superview = view.superview;
+    NSMutableArray *result = [NSMutableArray array];
+    while (superview) {
+        [result addObject:superview];
+        superview = superview.superview;
+    }
+    return result;
 }
 
 @end
